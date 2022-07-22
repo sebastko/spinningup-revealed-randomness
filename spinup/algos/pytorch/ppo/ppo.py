@@ -297,9 +297,10 @@ def ppo(env_fn, actor_critic=core.MLPActorCritic, ac_kwargs=dict(), seed=0,
     # Main loop: collect experience in env and update/log each epoch
     for epoch in range(epochs):
         for t in range(local_steps_per_epoch):
-            a, v, logp = ac.step(torch.as_tensor(o, dtype=torch.float32))
+            pi, v = ac.step(torch.as_tensor(o, dtype=torch.float32))
 
-            next_o, r, d, _ = env.step(a)
+            a, next_o, r, d, _ = env.step(pi)
+            logp = ac.get_logp(pi, a)
             ep_ret += r
             ep_len += 1
 
@@ -319,7 +320,7 @@ def ppo(env_fn, actor_critic=core.MLPActorCritic, ac_kwargs=dict(), seed=0,
                     print('Warning: trajectory cut off by epoch at %d steps.'%ep_len, flush=True)
                 # if trajectory didn't reach terminal state, bootstrap value target
                 if timeout or epoch_ended:
-                    _, v, _ = ac.step(torch.as_tensor(o, dtype=torch.float32))
+                    _, v = ac.step(torch.as_tensor(o, dtype=torch.float32))
                 else:
                     v = 0
                 buf.finish_path(v)
