@@ -11,7 +11,7 @@ with open(join("spinup", "version.py")) as version_file:
 
 setup(
     name='spinup',
-    py_modules=['spinup'],
+    packages=['spinup'],
     version=__version__,#'0.1',
 
     # Minimal set of requirements to use spinningup as a library.
