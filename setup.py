@@ -1,5 +1,5 @@
 from os.path import join, dirname, realpath
-from setuptools import setup
+from setuptools import setup, find_packages
 import sys
 
 assert sys.version_info.major == 3 and sys.version_info.minor >= 6, \
@@ -11,8 +11,8 @@ with open(join("spinup", "version.py")) as version_file:
 
 setup(
     name='spinup',
-    packages=setuptools.find_packages(include=['spinup']),
-    version=__version__,#'0.1',
+    packages=find_packages(include=['spinup']),
+    version='0.2',
 
     # Minimal set of requirements to use spinningup as a library.
     # Caution: not all functionality will work with just these dependencies. See the original spinningup repo
