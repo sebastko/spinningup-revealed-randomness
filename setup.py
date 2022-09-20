@@ -25,11 +25,12 @@ setup(
         'scipy',
         'torch',
         'tqdm',
+        'psutil',
         # Unfortunately it would require too many changes to drop this dependency.
         'tensorflow>=1.8.0,<2.0'
     ],
     extras_require={
-        'extras': ['cloudpickle==1.2.1', 'matplotlib==3.1.1', 'pandas', 'pytest', 'psutil', 'seaborn==0.8.1']
+        'extras': ['cloudpickle==1.2.1', 'matplotlib==3.1.1', 'pandas', 'pytest', 'seaborn==0.8.1']
     },
     description="Teaching tools for introducing people to deep RL.",
     author="Joshua Achiam",
